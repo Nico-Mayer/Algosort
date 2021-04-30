@@ -2,66 +2,113 @@ var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
 const width = 1200;
 const height = 800;
-const lineWidth = 3;
+const lineWidth = 2;
 const lineAmount = Math.floor(width/lineWidth) - Math.floor(Math.floor(width/lineWidth) / lineWidth);
-var values = new Array(lineAmount);
-var currLine = 0;
+var lines = new Array(lineAmount);
 
+var currLine = 0;
+var rounds = 0;
+var sorted = false;
 
 setup();
 
 
+
 window.requestAnimationFrame(function loop(){
-    if(currLine < lineAmount){
-    drawLine();
-    currLine = currLine + 1;
+    ctx.clearRect(0,0, width, height);
+    
+    for(var i = 0; i < lines.length; i++){
+        lines[i].display();
+        lines[i].color = "#000000";
     }
+    
+    var a = lines[currLine].height;
+    var b = lines[currLine+1].height;
+    lines[currLine].color = "#6fb98f";
+    lines[currLine+1].color = "#6fb98f";
+    
+    if(rounds <= lines.length){
+        if(currLine < lines.length - rounds - 1){
+            if(a > b){
+                swap(lines[currLine], lines[currLine+1]);
+            }
+            currLine = currLine + 1;
+        }
+    }
+    if(currLine == lines.length -rounds - 1){
+        currLine = 0;
+        rounds = rounds + 1;
+    }
+    
     window.requestAnimationFrame(loop);
+    
 })
 
 
 
 
 function setup(){
-    c.style.background = "#ff8";
+    c.style.background = "#2c7873";
     c.width = width;
     c.height = height;
-    fillValuesArray();
-    sort();
+    fillArray();
+    //sort();
     
 }
-
-
-function fillValuesArray(){
-    for(i = 0; i < values.length; i++){
-        values[i] = Math.floor(Math.random() * height);
-    }
-    console.log(values.length);
-    console.log(values)
-}
-
-function drawLine(){
-        ctx.beginPath();       
-        ctx.lineWidth = lineWidth;
-        if(currLine == 0){
-            ctx.moveTo((lineWidth/2) +2, 0); 
-            ctx.lineTo((lineWidth/2) +2, values[currLine]); 
-        }
-        ctx.moveTo(currLine*lineWidth + lineWidth/2 + currLine + 2, 0);
-        ctx.lineTo(currLine*lineWidth + lineWidth/2 + currLine + 2, values[currLine]);
-        ctx.stroke();
     
-    console.log(values);
-}
 
-function sort(){   
-    for(var i = 0; i < values.length; i++){
-      for(var j = 0; j < ( values.length - i -1 ); j++){
-        if(values[j] > values[j+1]){
-          var temp = values[j]
-          values[j] = values[j + 1]
-          values[j+1] = temp
+function fillArray(){
+    // Initialisieren des Line Arrays
+    for(var i = 0; i < lines.length; i++){
+        lines[i] = {
+            x: i*lineWidth + lineWidth/2 + i + 2,
+            y: 0,
+            width: lineWidth,
+            height: Math.floor(Math.random() * height),
+            color: "#000000",
+            display: function() {
+                ctx.beginPath();  
+                ctx.lineWidth = this.width;
+                if(i == 0){
+                    this.x = (lineWidth/2) +2;
+                }
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x, this.height);
+                ctx.strokeStyle = this.color;   
+                ctx.stroke();
+                ctx.closePath();
+            }
         }
-      }
     }
 }
+
+function swap(lineA, lineB){
+    var temp = lineA.height;
+    lineA.height = lineB.height;
+    lineB.height = temp;
+}
+
+// function sort(){ 
+//     var a = lines[currLine].height;
+//     var b = lines[currLine+1].height
+//     if(a > b){
+//         var temp = a;
+//         lines[currLine].height = b;
+//         lines[currLine+1].height = temp;
+//         console.log("round: "+ rounds +"CurrLine: "+currLine+" Swapped a: "+ a + "" + " with b: "+ b);
+//     }   
+// }
+
+
+ function sort(){   
+   for(var i = 0; i < lines.length; i++){
+       for(var j = 0; j < lines.length - i - 1; j++){
+            console.log(j);
+            if(lines[j].height > lines[j+1].height){
+                var temp = lines[j].height;
+                lines[j].height = lines[j + 1].height
+                lines[j+1].height = temp
+            }
+       }
+     }
+ }
