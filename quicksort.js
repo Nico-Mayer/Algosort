@@ -1,59 +1,101 @@
 var c = document.getElementById("canvas");
+var sort = false;
+var slider = document.getElementById("lineAmountSlider");
+var output = document.getElementById("value");
+var playBtn = document.getElementById("playBtn");
+playBtn.onclick = function() {
+    sort = !sort;
+}
+
 var ctx = c.getContext("2d");
 const width = 1200;
 const height = 800;
-const lineWidth = 2;
-const lineAmount = Math.floor(width/lineWidth) - Math.floor(Math.floor(width/lineWidth) / lineWidth);
+var lineWidth = 90;
+const gap = 1;
+var lineAmount = Math.floor((width-(gap*4))/(lineWidth+gap));
 var lines = new Array(lineAmount);
 
 var currLine = 0;
 var rounds = 0;
-var sorted = false;
+
 
 setup();
+
+output.innerHTML = lineAmount;
+slider.oninput = function() {
+    ctx.clearRect(0,0, width, height);
+    if(lineWidth >= 2){
+        lineWidth = Math.floor(this.value);
+    }
+
+    resetValues();
+    fillArray();
+    renderArray();
+    output.innerHTML = lineAmount;
+
+}
+
 
 
 
 window.requestAnimationFrame(function loop(){
-    ctx.clearRect(0,0, width, height);
+    if(sort){
+        ctx.clearRect(0,0, width, height);
+        renderArray();
     
-    for(var i = 0; i < lines.length; i++){
-        lines[i].display();
-        lines[i].color = "#000000";
-    }
+        var a = lines[currLine].height;
+        var b = lines[currLine+1].height;
+        lines[currLine].color = "#6fb98f";
+        lines[currLine+1].color = "#6fb98f";
     
-    var a = lines[currLine].height;
-    var b = lines[currLine+1].height;
-    lines[currLine].color = "#6fb98f";
-    lines[currLine+1].color = "#6fb98f";
-    
-    if(rounds <= lines.length){
-        if(currLine < lines.length - rounds - 1){
-            if(a > b){
-                swap(lines[currLine], lines[currLine+1]);
+        if(rounds <= lines.length){
+            if(currLine < lines.length - rounds - 1){
+                if(a > b){
+                    swap(lines[currLine], lines[currLine+1]);
+                }
+                currLine = currLine + 1;
             }
-            currLine = currLine + 1;
+        }
+        if(currLine == lines.length -rounds - 1){
+            currLine = 0;
+            rounds = rounds + 1;
+        }
+        if(rounds == lines.length){
+            sort = false;
+            renderArray();
+            console.log("sorted");
         }
     }
-    if(currLine == lines.length -rounds - 1){
-        currLine = 0;
-        rounds = rounds + 1;
-    }
-    
     window.requestAnimationFrame(loop);
-    
 })
 
 
 
 
+
 function setup(){
+    lineAmount = Math.floor((width-(gap*4))/(lineWidth+gap));
     c.style.background = "#2c7873";
     c.width = width;
     c.height = height;
     fillArray();
-    //sort();
+    renderArray();
     
+}
+
+function renderArray() {
+    for(var i = 0; i < lines.length; i++){
+        lines[i].display();
+        lines[i].color = "#000000";
+    }
+}
+
+function resetValues() {
+    lineAmount = Math.floor((width-(gap*4))/(lineWidth+gap));
+    lines = [];
+    lines = new Array(lineAmount);
+    currLine = 0;
+    rounds = 0;
 }
     
 
@@ -88,19 +130,11 @@ function swap(lineA, lineB){
     lineB.height = temp;
 }
 
-// function sort(){ 
-//     var a = lines[currLine].height;
-//     var b = lines[currLine+1].height
-//     if(a > b){
-//         var temp = a;
-//         lines[currLine].height = b;
-//         lines[currLine+1].height = temp;
-//         console.log("round: "+ rounds +"CurrLine: "+currLine+" Swapped a: "+ a + "" + " with b: "+ b);
-//     }   
-// }
 
 
- function sort(){   
+
+
+/*  function sort(){   
    for(var i = 0; i < lines.length; i++){
        for(var j = 0; j < lines.length - i - 1; j++){
             console.log(j);
@@ -111,4 +145,4 @@ function swap(lineA, lineB){
             }
        }
      }
- }
+ } */
