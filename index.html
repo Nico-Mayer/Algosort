@@ -1,26 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
-    <link href="styles.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visulizer</title>
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
 </head>
 <body>
-    
-    <div class="playBtn" id="playBtn"></div>
-    <div class="app">
-        
-        <canvas width height id="canvas"></canvas>
-        <div class="slideContainer">
-            <input type="range" min="2" max="110" value="54" id="lineAmountSlider" class="slider">
-            <p>Value: <span id="value"></span></p>
+
+    <div class="container">
+        <div class="head" id="header">
+            <h1 class="logo">ALGOSORT</h1>
+            <ul class="nav_links">
+                <li><a href="#">Sorting</a></li>
+                <li><a href="#">Project</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <a class="cta" href="#"><button>Contact</button></a>
         </div>
+        
+        
+        <div class="app" id="app">
+            <div class="appContainer" id= "appContainer">
+                <div class="algoControls" id="algoControls">
+                    <div class="algoTab">Bubble Sort</div>
+                    <div class="algoTab">Quick Sort</div>
+                    <div class="algoTab">Merge Sort</div>
+                    <div class="algoTab">Insertion Sort</div>
+                    <div class="algoTab">Selection Sort</div>
+                </div>
+                <dis class= "canvas" id="canvas"></dis>
+                <div class="controls">
+                    <div class="playBtn" id="playBtn"><img src="/icons/playBtn.svg" alt=""></div>
+                    <div class="resetBtn" id="resetBtn"><img src="/icons/reload.svg" alt=""></div>
+                    <input type="range" min="2" max="110" value="54" id="lineAmountSlider" class="slider">
+                    <input type="range" min="1" max="300" value="1" id="speedSlider" class="slider">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="footer" id="footer">footer</div>
     </div>
     
     
     
+    
 </body>
-<script src="quicksort.js"></script>
+<!-- <script src="quicksort.js"></script> //-->
+<!-- <script src="bubblesort.js"></script> //-->
+<script src="sketch.js"></script>
 </html>

@@ -14,6 +14,10 @@ var lineWidth = 90;
 const gap = 1;
 var lineAmount = Math.floor((width-(gap*4))/(lineWidth+gap));
 var lines = new Array(lineAmount);
+var renderspeed = 10;
+
+var currLine = 0;
+var rounds = 0;
 // SLIDER
 output.innerHTML = lineAmount;
 slider.oninput = function() {
@@ -31,13 +35,11 @@ slider.oninput = function() {
 
 setup();
 
-
 window.requestAnimationFrame(function loop(){
-    ctx.clearRect(0,0, width, height);
-    quicksort(lines, 0, lines.length-1);
+    bubblesort();
     renderArray();
     window.requestAnimationFrame(loop);
-}) 
+})
 
 function setup(){
     lineAmount = Math.floor((width-(gap*4))/(lineWidth+gap));
@@ -89,36 +91,41 @@ function fillArray(){
     }
 }
 
-async function swap(lineA, lineB){
-    await sleep(10);
+function swap(lineA, lineB){
     var temp = lineA.height;
     lineA.height = lineB.height;
     lineB.height = temp;
 }
-async function quicksort(lines, start, end){
+
+function bubblesort(){
     if(sorting){
-        if(start >= end){
-            return;
+        for(i = 0; i < renderspeed; i++){
+            var a = lines[currLine].height;
+            var b = lines[currLine+1].height;
+            lines[currLine].color = "#6fb98f";
+            lines[currLine+1].color = "#6fb98f";
+    
+            if(rounds <= lines.length){
+                if(currLine < lines.length - rounds - 1){
+                    if(a < b){
+                        swap(lines[currLine], lines[currLine+1]);
+                    }
+                    currLine = currLine + 1;
+                }
+            }
+            if(currLine == lines.length -rounds - 1){
+                currLine = 0;
+                rounds = rounds + 1;
+            }
+            if(rounds == lines.length){
+                sorting = false;
+                renderArray();
+                console.log("sorted");
+            }
         }
-        var index = await partition(lines, start, end);
-        await quicksort(lines, start, index -1);
-        await quicksort(lines, index+1, end);
     }
 }
 
-async function partition(lines, start, end){
-    var pivotIndex = start;
-    var pivotValue = lines[end].height;
-    for(var i = start; i < end; i++){
-        if(lines[i].height > pivotValue){
-            await swap(lines[i], lines[pivotIndex])
-            pivotIndex++;
-        }
-    }
-    await swap(lines[pivotIndex], lines[end]);
-    return pivotIndex;
-}
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+
+
