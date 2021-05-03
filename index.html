@@ -47,12 +47,18 @@
                         <label for="selectionsortTab">Selectionsort</label>
                     </div>
                 </div>
-                <dis class= "canvas" id="canvas"></dis>
+                <div class= "canvas" width="1200" height="800" id="canvas"></div>
                 <div class="controls">
                     <div class="playBtn" id="playBtn"><img src="/icons/playBtn.svg" alt=""></div>
                     <div class="resetBtn" id="resetBtn"><img src="/icons/reload.svg" alt=""></div>
-                    <input type="range" min="1" max="80" value="54" id="lineAmountSlider" class="slider">
-                    <input type="range" min="1" max="300" value="31" id="speedSlider" class="slider">
+                    <label class="sliderContainer">
+                        Array Size:
+                        <input type="range" min="1" max="80" value="54" id="lineAmountSlider" class="slider">
+                    </label>
+                    <label class="sliderContainer">
+                        Speed:
+                        <input type="range" min="1" max="300" value="31" id="speedSlider" class="slider">
+                    </label>
                 </div>
             </div>
             
@@ -65,7 +71,10 @@
     
     
 </body>
-<!-- <script src="quicksort.js"></script> //-->
-<!-- <script src="bubblesort.js"></script> //-->
-<script src="quicksort.js"></script>
+<script src="bubblesort.js"></script>
+<script src="buttons.js"></script>
+<script src="sliders.js"></script>
+<script src="lines.js"></script>
+<script src="main.js"></script>
+
 </html>
