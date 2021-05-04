@@ -3,5 +3,5 @@
     "*.js",
     "libraries/*.js",
     "/home/nico/.vscode-server/extensions/samplavigne.p5-vscode-1.2.6/p5types/global.d.ts"
-  ]
+, "scripts/sliders.js", "scripts/quicksort.js", "scripts/main.js", "scripts/lines.js", "scripts/buttons.js", "scripts/bubblesort.js"  ]
 }
