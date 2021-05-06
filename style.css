@@ -60,8 +60,6 @@ body{
 .canvas {
   grid-area: canvas;
   border-bottom: none;
-  height: 800px;
-  width: 1200px
 }
 
 .algoControls{

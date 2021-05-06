@@ -1,81 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <link href="style.css" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link href="style.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visulizer</title>
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container">
-        <div class="head" id="header">
-            <h1 class="logo">ALGOSORT</h1>
-            <ul class="nav_links">
-                <li><a href="#">Sorting</a></li>
-                <li><a href="#">Project</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
-            <a class="cta" href="#"><button>Contact</button></a>
-        </div>
-        
-        
-        <div class="app" id="app">
-            <div class="appContainer" id= "appContainer">
-                <div class="algoControls" id="algoControls">
-                    <div class="algoTab">
-                        <input type="radio" id= "bubblesortTab" name="algoTabs" checked=checked>
-                        <label for="bubblesortTab">Bubblesort</label>
-                    </div>
-                    <div class="algoTab">
-                        <input type="radio" id= "quicksortTab" name="algoTabs">
-                        <label for="quicksortTab">Quicksort</label>
-                    </div>
-                    <div class="algoTab">
-                        <input type="radio" id= "mergesortTab" name="algoTabs">
-                        <label for="mergesortTab">Mergesort</label>
-                    </div>
-                    <div class="algoTab">
-                        <input type="radio" id= "insertionsortTab" name="algoTabs">
-                        <label for="insertionsortTab">Insertionsort</label>
-                    </div>
-                    <div class="algoTab">
-                        <input type="radio" id= "selectionsortTab" name="algoTabs">
-                        <label for="selectionsortTab">Selectionsort</label>
-                    </div>
-                </div>
-                <div class= "canvas" width="1200" height="800" id="canvas"></div>
-                <div class="controls">
-                    <div class="playBtn" id="playBtn"><img src="/icons/playBtn.svg" alt=""></div>
-                    <div class="resetBtn" id="resetBtn"><img src="/icons/reload.svg" alt=""></div>
-                    <label class="sliderContainer">
-                        Array Size:
-                        <input type="range" min="1" max="80" value="24" id="lineAmountSlider" class="slider">
-                    </label>
-                    <label class="sliderContainer">
-                        Speed:
-                        <input type="range" min="1" max="300" value="10" id="speedSlider" class="slider">
-                    </label>
-                </div>
+      <div class="head" id="header">
+        <h1 class="logo">ALGOSORT</h1>
+        <ul class="nav_links">
+          <li><a href="#">Sorting</a></li>
+          <li><a href="#">Project</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+        <a class="cta" href="#"><button>Contact</button></a>
+      </div>
+
+      <div class="app" id="app">
+        <div class="appContainer" id="appContainer">
+          <div class="algoControls" id="algoControls">
+            <div class="algoTab">
+              <input
+                type="radio"
+                id="bubblesortTab"
+                name="algoTabs"
+                value="1"
+              />
+              <label for="bubblesortTab">Bubblesort</label>
             </div>
-            
+            <div class="algoTab">
+              <input type="radio" id="quicksortTab" name="algoTabs" />
+              <label for="quicksortTab">Quicksort</label>
+            </div>
+            <div class="algoTab">
+              <input type="radio" id="mergesortTab" name="algoTabs" />
+              <label for="mergesortTab">Mergesort</label>
+            </div>
+            <div class="algoTab">
+              <input type="radio" id="insertionsortTab" name="algoTabs" />
+              <label for="insertionsortTab">Insertionsort</label>
+            </div>
+            <div class="algoTab">
+              <input type="radio" id="selectionsortTab" name="algoTabs" />
+              <label for="selectionsortTab">Selectionsort</label>
+            </div>
+          </div>
+          <div
+            class="canvas"
+            style="width: 1200px; height: 800px"
+            id="canvas"
+          ></div>
+          <div class="controls">
+            <div class="playBtn" id="playBtn">
+              <img src="/icons/playBtn.svg" alt="" />
+            </div>
+            <div class="resetBtn" id="resetBtn">
+              <img src="/icons/reload.svg" alt="" />
+            </div>
+            <label class="sliderContainer">
+              Array Size:
+              <input
+                type="range"
+                min="1"
+                max="80"
+                value="24"
+                id="lineAmountSlider"
+                class="slider"
+              />
+            </label>
+            <label class="sliderContainer">
+              Speed:
+              <input
+                type="range"
+                min="1"
+                max="300"
+                value="10"
+                id="speedSlider"
+                class="slider"
+              />
+            </label>
+          </div>
         </div>
+      </div>
 
-        <div class="footer" id="footer"></div>
+      <div class="footer" id="footer"></div>
     </div>
-    
-    
-    
-    
-</body>
-<!-- <script src="/scripts/bubblesort.js"></script> -->
-<script src="/scripts/quicksort.js"></script>
-<script src="/scripts/buttons.js"></script>
-<script src="/scripts/sliders.js"></script>
-<script src="/scripts/lines.js"></script>
-<script src="/scripts/main.js"></script>
-
+  </body>
+  <script src="/scripts/insertionsort.js"></script>
+  <script src="/scripts/bubblesort.js"></script>
+  <script src="/scripts/quicksort.js"></script>
+  <script src="/scripts/buttons.js"></script>
+  <script src="/scripts/sliders.js"></script>
+  <script src="/scripts/lines.js"></script>
+  <script src="/scripts/main.js"></script>
 </html>
