@@ -1,4 +1,4 @@
-Algosort is a Website for Visualizing diffrent Algorythmens to make it more Clear how they Work.
+Algosort is a Website for Visualizing different Algorithms to make it more Clear how they Work.
 
 Installation:
 
